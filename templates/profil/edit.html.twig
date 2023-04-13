@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edition de l'utilisateur {{ user.nom }} {% endblock %}
+
+{% block body %}
+    <div class="container">
+		<div class="row">
+			<div class="col">
+                <h1> Modification du compte {{ user.nom }}</h1>
+
+                {{ form_start(form) }}
+                    {{ form_row(form.nom) }}
+                    {{ form_row(form.prenom) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.phone) }}
+                    
+                    <button type="submit" class="btn btn-lg btn-info my-3"> Modifier </button>                    
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

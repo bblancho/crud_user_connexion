@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Liste des utilisateurs {% endblock %}
+
+{% block body %}
+    <h1> Liste des utilisateurs </h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date de création </th>
+                <th>Date de modification </th>
+                <th>Email</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Phone</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.prenom }}</td>
+                    <td>{{ user.nom }}</td>
+                    <td>{{ user.phone }}</td>
+                    <td>
+                        <a class="btn btn-outline-info" href="{{ path('profil_show', {'id': user.id}) }}">Afficher</a>
+                        <a class="btn btn-outline-success" href="{{ path('profil_edit', {'id': user.id}) }}">Modifier</a>
+                        {{ include('profil/_delete_form.html.twig') }}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8"> Aucun utilisateurs trouvés </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+  <!-- DATATABLE -->
+    <script src="{{asset('plugins/datatable/dataTable.min.js')}}"></script>
+  <!-- END DATATABLE -->
+{% endblock %}
